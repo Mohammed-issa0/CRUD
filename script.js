@@ -21,3 +21,37 @@ function getTotal(){
         total.style.background='red';
     }
 }
+
+let dataPro;
+if(localStorage.pro != null){
+    dataPro = JSON.parse(localStorage.pro);
+}else{
+    dataPro= [];
+}
+
+submit.onclick = function(){
+    let newPro ={
+    title: title.value,
+    price: price.value,
+    taxes: taxes.value,
+    ads: ads.value,
+    discount: discount.value,
+    total: total.innerHTML,
+    count: count.value,
+    category: category.value,
+    }
+    dataPro.push(newPro);
+    localStorage.setItem('pro' , JSON.stringify(dataPro));
+    clearData();
+}
+
+function clearData(){
+    title.value='';
+    price.value='';
+    taxes.value='';
+    ads.value='';
+    discount.value='';
+    total.innerHTML='';
+    count.value='';
+    category.value='';
+}
