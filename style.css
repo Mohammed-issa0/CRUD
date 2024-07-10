@@ -152,11 +152,11 @@ table th{
     border-radius: 5px;
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     table th{
         font-size: large;
     }
-}
+} */
 td, th{
     padding: 5px;
 }
