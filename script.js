@@ -33,16 +33,17 @@ submit.onclick = function(){
     let newPro ={
     title: title.value,
     price: price.value,
-    taxes: taxes.value,
-    ads: ads.value,
-    discount: discount.value,
-    total: total.innerHTML,
-    count: count.value,
+    taxes : taxes.value || 0,
+    ads : ads.value || 0,
+    discount : discount.value || 0,
+    total : total.innerHTML,
+    count : count.value,
     category: category.value,
     }
     dataPro.push(newPro);
     localStorage.setItem('pro' , JSON.stringify(dataPro));
     clearData();
+    showData();
 }
 
 function clearData(){
@@ -55,3 +56,25 @@ function clearData(){
     count.value='';
     category.value='';
 }
+
+function showData(){
+   let table= '';
+    for(let i=0; i< dataPro.length; ++i){
+        table += ` 
+                <tr>
+                   <td>${i}</td>
+                   <td>${dataPro[i].title}</td>
+                   <td>${dataPro[i].price}</td>
+                   <td class="a">${dataPro[i].taxes}</td>
+                   <td class="a">${dataPro[i].ads}</td>
+                   <td class="a">${dataPro[i].discount}</td>
+                   <td>${dataPro[i].total}</td>
+                   <td>${dataPro[i].category}</td>
+                   <td><button>update</button></td>
+                   <td><button>delete</button></td>
+                </tr>`;
+                
+    }
+    document.getElementById('tbody').innerHTML= table;
+}
+showData();
