@@ -34,10 +34,19 @@ body{
     width: 80%;
     margin: auto;
 }
-
+.ch{
+    color: #a01fb7;
+}
+@media (max-width: 991px){
+    .crud{
+        width: 90%;
+        margin: auto;
+    }
+}
 .head{
     text-align: center;
     text-transform: uppercase;
+    margin-bottom: 10px;
 }
 @media (max-width: 991px) {
     .head{
@@ -98,7 +107,7 @@ button{
     height: 30px;
     border: none;
     cursor: pointer;
-    background-color: #390053;
+    background-color: #a01fb7;
     color: #fff;
     border-radius: 20px;
     transition: 0.5s;
