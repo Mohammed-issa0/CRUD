@@ -9,6 +9,7 @@ let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 let temp;
 let mood='create';
+let Search = document.getElementById('search');
 
 // console.log(title, price, taxes, ads, discount, total, count, category, submit);
 
@@ -16,11 +17,11 @@ function getTotal(){
     if(price.value != ''){
         let result = (+price.value + +taxes.value + +ads.value) - +discount.value;
         total.innerHTML=result;
-        total.style.background='#040';
+        total.style.background='#a01fb7';
     }
     else{
         total.innerHTML='';
-        total.style.background='red';
+        total.style.background='#111';
     }
 }
 
@@ -134,4 +135,58 @@ function updateData(i){
     scroll({
         top: 0,
     })
+}
+
+let searchMood ="Title";
+function getSearchMood(id){
+    if(id == "search-title") {
+        searchMood="Title";
+    } else{
+    searchMood="Category";
+}
+Search.placeholder='Search By '+ searchMood;
+Search.focus();
+Search.value='';
+showData();
+// console.log(searchMood);
+}
+
+function searchData(value){
+    let data='';
+    for(let i=0; i<dataPro.length; ++i){
+        if(searchMood=='title'){
+                if(dataPro[i].title.includes(value)){
+                    data += ` 
+                    <tr>
+                    <td>${i}</td>
+                    <td>${dataPro[i].title}</td>
+                    <td>${dataPro[i].price}</td>
+                    <td class="a">${dataPro[i].taxes}</td>
+                    <td class="a">${dataPro[i].ads}</td>
+                    <td class="a">${dataPro[i].discount}</td>
+                    <td>${dataPro[i].total}</td>
+                    <td>${dataPro[i].category}</td>
+                    <td onclick= updateData(${i})><button>update</button></td>
+                    <td onclick= deleteData(${i})><button>delete</button></td>
+                    </tr>`;
+                }
+        }else{
+                if(dataPro[i].category.includes(value)){
+                    data += ` 
+                    <tr>
+                    <td>${i}</td>
+                    <td>${dataPro[i].title}</td>
+                    <td>${dataPro[i].price}</td>
+                    <td class="a">${dataPro[i].taxes}</td>
+                    <td class="a">${dataPro[i].ads}</td>
+                    <td class="a">${dataPro[i].discount}</td>
+                    <td>${dataPro[i].total}</td>
+                    <td>${dataPro[i].category}</td>
+                    <td onclick= updateData(${i})><button>update</button></td>
+                    <td onclick= deleteData(${i})><button>delete</button></td>
+                    </tr>`;
+                }
+        }
+    }
+    document.getElementById('tbody').innerHTML= data;
 }
