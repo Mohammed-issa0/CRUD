@@ -5,6 +5,7 @@
     padding: 0;
     margin: 0;
     caret-color: #a01fb7;
+    scroll-behavior: smooth;
 }
 ::selection{
     background-color: #a01fb7;

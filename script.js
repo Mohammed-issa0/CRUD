@@ -7,6 +7,8 @@ let total = document.getElementById('total');
 let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
+let temp;
+let mood='create';
 
 // console.log(title, price, taxes, ads, discount, total, count, category, submit);
 
@@ -40,13 +42,22 @@ submit.onclick = function(){
     count : count.value,
     category: category.value || "---",
     }
-    if(newPro.count >1){
+    if(mood === 'create'){
+        if(newPro.count >1){
         for(let i=0; i<newPro.count; ++i){
             dataPro.push(newPro);
         }
     }else{
         dataPro.push(newPro);
     }
+    }else{
+        dataPro[temp]=newPro;
+        mood='create';
+        submit.innerHTML='Create';
+        count.style.display='block';
+
+    }
+    
     
     localStorage.setItem('pro' , JSON.stringify(dataPro));
     clearData();
@@ -65,6 +76,7 @@ function clearData(){
 }
 
 function showData(){
+    getTotal();
    let data= '';
     for(let i=0; i< dataPro.length; ++i){
         data += ` 
@@ -77,7 +89,7 @@ function showData(){
                    <td class="a">${dataPro[i].discount}</td>
                    <td>${dataPro[i].total}</td>
                    <td>${dataPro[i].category}</td>
-                   <td><button>update</button></td>
+                   <td onclick= updateData(${i})><button>update</button></td>
                    <td onclick= deleteData(${i})><button>delete</button></td>
                 </tr>`;
                 
@@ -107,3 +119,19 @@ function deleteAll(){
     showData();
 }
 
+function updateData(i){
+    title.value= dataPro[i].title;
+    price.value= dataPro[i].price;
+    ads.value= dataPro[i].ads;
+    discount.value=dataPro[i].discount;
+    taxes.value=dataPro[i].taxes;
+    category.value=dataPro[i].category;
+    count.style.display='none';
+    submit.innerHTML='Updata';
+    getTotal();
+    temp=i;
+    mood='updata';
+    scroll({
+        top: 0,
+    })
+}
