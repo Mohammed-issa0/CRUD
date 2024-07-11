@@ -43,25 +43,32 @@ submit.onclick = function(){
     count : count.value,
     category: category.value || "---",
     }
-    if(mood === 'create'){
-        if(newPro.count >1){
-        for(let i=0; i<newPro.count; ++i){
+
+    if(title.value !='' &&
+        price.value !='' &&
+        category.value != '' &&
+        count.value <=100
+    ){
+        if(mood === 'create'){
+            if(newPro.count >1){
+            for(let i=0; i<newPro.count; ++i){
+                dataPro.push(newPro);
+            }
+        }else{
             dataPro.push(newPro);
         }
-    }else{
-        dataPro.push(newPro);
-    }
-    }else{
-        dataPro[temp]=newPro;
-        mood='create';
-        submit.innerHTML='Create';
-        count.style.display='block';
+        }else{
+            dataPro[temp]=newPro;
+            mood='create';
+            submit.innerHTML='Create';
+            count.style.display='block';
 
+        }
+        clearData();    
     }
-    
     
     localStorage.setItem('pro' , JSON.stringify(dataPro));
-    clearData();
+    
     showData();
 }
 
@@ -82,7 +89,7 @@ function showData(){
     for(let i=0; i< dataPro.length; ++i){
         data += ` 
                 <tr>
-                   <td>${i}</td>
+                   <td>${i+1}</td>
                    <td>${dataPro[i].title}</td>
                    <td>${dataPro[i].price}</td>
                    <td class="a">${dataPro[i].taxes}</td>
@@ -158,7 +165,7 @@ function searchData(value){
                 if(dataPro[i].title.includes(value)){
                     data += ` 
                     <tr>
-                    <td>${i}</td>
+                    <td>${i+1}</td>
                     <td>${dataPro[i].title}</td>
                     <td>${dataPro[i].price}</td>
                     <td class="a">${dataPro[i].taxes}</td>
@@ -174,7 +181,7 @@ function searchData(value){
                 if(dataPro[i].category.includes(value)){
                     data += ` 
                     <tr>
-                    <td>${i}</td>
+                    <td>${i+1}</td>
                     <td>${dataPro[i].title}</td>
                     <td>${dataPro[i].price}</td>
                     <td class="a">${dataPro[i].taxes}</td>
