@@ -4,6 +4,11 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    caret-color: #a01fb7;
+}
+::selection{
+    background-color: #a01fb7;
+    color: #fff;
 }
 html {
     scroll-behavior: smooth;
@@ -44,9 +49,12 @@ body{
     }
 }
 .head{
-    text-align: center;
+    /* text-align: center; */
+    display: flex;
+    justify-content: space-between;
     text-transform: uppercase;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 @media (max-width: 991px) {
     .head{
@@ -159,4 +167,8 @@ table th{
 } */
 td, th{
     padding: 5px;
+}
+
+#deleteAll{
+    margin: 7px 0;
 }
